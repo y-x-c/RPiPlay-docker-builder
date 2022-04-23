@@ -22,4 +22,4 @@ RUN cp /usr/lib/arm-linux-gnueabihf/libdns_sd.so.1 ./build/
 # Alter the cmake file to use the libdns_sd library locally
 RUN printf "\nadd_library(dns_sd SHARED IMPORTED GLOBAL)\nset_target_properties(dns_sd PROPERTIES IMPORTED_LOCATION \"./libdns_sd.so.1\")\n" >>./lib/CMakeLists.txt
 
-RUN cd build && cmake .. && make
+RUN cd build && cmake --DCMAKE_CXX_FLAGS="-O3" --DCMAKE_C_FLAGS="-O3" .. && make -j
